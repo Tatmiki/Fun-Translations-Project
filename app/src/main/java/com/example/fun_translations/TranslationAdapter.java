@@ -36,7 +36,7 @@ public class TranslationAdapter extends RecyclerView.Adapter<TranslationAdapter.
     public void onBindViewHolder(@NonNull TranslationViewHolder holder, int position) {
         TranslationResponse translationResponse = translationResponses.get(position);
         holder.messageTextView.setText(translationResponse.contents.text);
-        holder.authorTextView.setText(translationResponse.contents.translation);
+        holder.authorTextView.setText("Tipo: " + translationResponse.contents.translation);
         holder.translationTextView.setText(translationResponse.contents.translated);
 
         // Configura o listener do botão de apagar

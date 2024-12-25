@@ -7,11 +7,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- ImageView para o header -->
+    <ImageView
+        android:id="@+id/headerImage"
+        android:layout_width="match_parent"
+        android:layout_height="205dp"
+        android:layout_alignParentTop="true"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/fun" /> <!-- Substitua por seu arquivo "fun.png" -->
+
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@id/headerImage" /> <!-- Coloca a RecyclerView abaixo da imagem -->
 
+    <!-- Floating Action Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
