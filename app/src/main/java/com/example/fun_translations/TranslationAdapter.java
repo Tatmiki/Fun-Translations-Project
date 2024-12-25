@@ -1,6 +1,5 @@
 package com.example.fun_translations;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import java.util.List;
 
 public class TranslationAdapter extends RecyclerView.Adapter<TranslationAdapter.TranslationViewHolder> {
 
-    private final List<Translation> translations;
+    private final List<TranslationResponse> translationResponses;
     private final OnDeleteClickListener onDeleteClickListener;
 
     // Interface para o listener do botão de apagar
@@ -20,8 +19,8 @@ public class TranslationAdapter extends RecyclerView.Adapter<TranslationAdapter.
         void onDelete(int position);
     }
 
-    public TranslationAdapter(List<Translation> translations, OnDeleteClickListener onDeleteClickListener) {
-        this.translations = translations;
+    public TranslationAdapter(List<TranslationResponse> translationResponses, OnDeleteClickListener onDeleteClickListener) {
+        this.translationResponses = translationResponses;
         this.onDeleteClickListener = onDeleteClickListener;
     }
 
@@ -35,9 +34,10 @@ public class TranslationAdapter extends RecyclerView.Adapter<TranslationAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull TranslationViewHolder holder, int position) {
-        Translation translation = translations.get(position);
-        holder.messageTextView.setText(translation.getMessage());
-        holder.authorTextView.setText(translation.getAuthor());
+        TranslationResponse translationResponse = translationResponses.get(position);
+        holder.messageTextView.setText(translationResponse.contents.text);
+        holder.authorTextView.setText(translationResponse.contents.translation);
+        holder.translationTextView.setText(translationResponse.contents.translated);
 
         // Configura o listener do botão de apagar
         holder.deleteButton.setOnClickListener(v -> {
@@ -49,18 +49,20 @@ public class TranslationAdapter extends RecyclerView.Adapter<TranslationAdapter.
 
     @Override
     public int getItemCount() {
-        return translations.size();
+        return translationResponses.size();
     }
 
     static class TranslationViewHolder extends RecyclerView.ViewHolder {
         TextView messageTextView;
         TextView authorTextView;
+        TextView translationTextView;
         ImageButton deleteButton;
 
         public TranslationViewHolder(@NonNull View itemView) {
             super(itemView);
-            messageTextView = itemView.findViewById(R.id.txxtViewMsg);
+            messageTextView = itemView.findViewById(R.id.txtViewText);
             authorTextView = itemView.findViewById(R.id.edTxtViewAutor);
+            translationTextView = itemView.findViewById(R.id.txtViewTranslated);
             deleteButton = itemView.findViewById(R.id.btnApagar);
         }
     }
