@@ -16,8 +16,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class MainActivity extends AppCompatActivity {
 
+    private Retrofit retrofit;
     private RecyclerView recyclerView;
     private TranslationAdapter translationAdapter;
     FloatingActionButton fab;
@@ -33,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        String url = "https://api.funtranslations.com/";
+        retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
         recyclerView = findViewById(R.id.recyclerView);
         translations = new ArrayList<>();
 
